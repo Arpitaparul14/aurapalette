@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎨 AuraPalette
 
-## Getting Started
+Transform your mood into a complete design system — instantly.
 
-First, run the development server:
+AuraPalette takes a simple text description of how you're feeling ("calm and creative", "explosive cyberpunk energy") and uses AI to generate a full, cohesive design theme: color palette, typography, gradients, shadows, and glass effects — then renders a live mini UI dashboard styled entirely in that theme, ready to copy or download as CSS.
+
+## ✨ Features
+
+- **Mood → Design AI**: Natural language mood input generates a structured, validated design token set (Zod-enforced schema)
+- **Live theming**: Every part of the preview — buttons, badges, cards, inputs, nav bar — re-skins in real time based on the generated palette
+- **Dynamic fonts**: Automatically loads and applies the AI-selected Google Font per mood, so different moods feel visually distinct, not just color-different
+- **Ambient mood-reactive background**: A canvas-based animated gradient smoothly shifts its colors to match whatever mood you just generated
+- **CSS export**: One-click copy to clipboard or download as a standalone `.css` file with CSS custom properties
+- **Smooth, animated UX**: Framer Motion throughout — staggered swatch reveals with spring physics, scroll-triggered reveals, hover tilt effects, toast notifications
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS
+- **Animation**: Framer Motion
+- **State**: Zustand
+- **Validation**: Zod
+- **AI**: Groq API (Llama 3.3 70B) for structured JSON generation
+- **Smooth scroll**: Lenis
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js v18+
+- A free [Groq API key](https://console.groq.com/keys)
+
+### Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Arpitaparul14/aurapalette.git
+cd aurapalette
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a `.env.local` file in the root:
+GROQ_API_KEY=your_key_here
+Run the dev server:
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Open [http://localhost:3000](http://localhost:3000).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📸 How it works
 
-## Learn More
+1. Type a mood or vibe into the input
+2. The API route sends a structured prompt to Groq, requesting a strict JSON schema (colors, gradient, font, radius, shadow, glass, animation)
+3. The response is validated against a Zod schema before rendering — malformed AI output is caught and surfaced as a clean error instead of crashing the UI
+4. The validated palette drives every visual element on the page, live
 
-To learn more about Next.js, take a look at the following resources:
+## 🗺️ Possible next steps
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Save/favorite generated themes
+- Export as Tailwind config or SCSS variables
+- Shareable palette links
+- Accessibility/contrast scoring on generated palettes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📄 License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
